@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="player.css">
+    <link rel="stylesheet" href="player.js">
+    <script src="https://kit.fontawesome.com/6094cf4d36.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+                <div class="image">
+                    <img src="FMS.PNG" alt="starboy-weekend" class="song-img">
+                </div>
+                <div class="invite">
+                    <h2>Annual Dinner <br><span id="invite2">INVITATION</span></h2>
+                </div>
+                <div class="note">
+                    <p>"Join us for a melodious evening of rhythm and harmony! FAST Music Society invites you to an enchanting musical gathering, Let's celebrate the magic of music together!"</p>
+                </div>
+            <audio id="song">
+                <source src="Bayaan - Farda (Official Video).mp3" type="audio/mpeg">
+            </audio>
+            <div class="loader">
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+            </div>
+            <!-- <p>Date: 12-10-23</p>
+            <p>Time: 4:00 pm</p>
+            <input type="range" value="0" id="progress"> -->
+
+            <div class="controls">
+                <div onclick="playPause()"><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
+            </div>
+            <div class="details">
+                <h5>Date: 12-08-23 <br>Time: 4:00 pm <br>Venue: Arcadian Cafe</h5>
+            </div>
+
+        </div>
+    </div> 
+
+    <script>
+
+let progress = document.getElementById("progress")
+let song = document.getElementById("song")
+let ctrlIcon = document.getElementById ("ctrlIcon")
+
+song.onloadedmetadata = function(){
+    progress.max = song.duration;
+    progress.value = song.currentTime
+
+}
+function playPause(){
+    if(ctrlIcon.classList.contains("fa-pause")){
+         song.pause();
+         ctrlIcon.classList.remove("fa-pause");
+         ctrlIcon.classList.add("fa-play"); 
+
+    }
+    else{
+        song.play();
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+    }
+}
+
+    if(song.play())
+    {
+        setInterval(()=>{
+            progress.value = song.currentTime;
+        },500)
+    }
+    progress.onchange = function()
+    {
+         song.play() 
+         song.currentTime = progress.value;
+         ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
+    }
+
+    </script>
+</body>
+</html>
